@@ -16,9 +16,10 @@ pipeline {
                 sh 'echo "Running tests..."'
             }
         }
-        stage('Deploy') {
-            steps {
-                sh 'echo "Deploying to GCP..."'
+        stage('Deploy to GCP') {
+        steps {
+            sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
+            sh 'gcloud app deploy --quiet'
             }
         }
     }
